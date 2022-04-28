@@ -1,0 +1,294 @@
+[data-elm-hot="true"] {
+  height: inherit;
+}
+
+body {
+  background-color: #bfbfbf;
+  text-align: center;
+  font-family: "Courier New";
+}
+
+#file-upload {
+  display: none;
+}
+
+.custom-file-upload {
+  width: 95%;
+  display: block;
+
+  text-align: center;
+  margin: 2% auto;
+
+  border: 7px dashed #999999;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.custom-file-upload:hover {
+  border-color: #808080;
+}
+
+.custom-file-upload:hover h1 {
+  color: #808080;
+}
+
+.custom-file-upload h1 {
+  margin: 35px 0px;
+  font-size: 30px;
+
+  font-family: "Courier New";
+  font-weight: bold;
+  color: #999999;
+
+  transition: 0.2s;
+}
+
+.read-files, .read-boiler {
+  padding: 1%;
+
+  color: white;
+  align-self: center;
+  font-family: "Courier New";
+  background-color: #4da6ff;
+  border: 3px solid #4da6ff;
+}
+
+.read-files {
+  width: 25%;
+}
+
+.read-boiler {
+  width: 50%;
+
+  margin: 5% 25% 2%;
+
+  align-self:
+}
+
+.read-files:hover, .read-boiler:hover {
+  background-color: rgb(12, 145, 216);
+  border-color: rgb(12, 145, 216);
+}
+
+.boilerplate {
+  width: 100%;
+
+  margin: 5% 0% 2%;
+
+  text-align: center;
+}
+
+.elm-file-box {
+  width: 45%;
+  display: inline-block;
+
+  margin: 1% 2%;
+}
+
+.elm-file {
+  display: relative;
+  width: 100%;
+
+  top: 0px;
+  left: 0px;
+
+  border: solid 3px rgb(12, 145, 216);
+  box-shadow: 5px 5px 0px 1px rgb(12, 145, 216);
+}
+
+.elm-file:hover {
+  top: 4px;
+  left: 4px;
+  position: relative;
+  box-shadow: 2px 2px rgb(12, 145, 216);
+}
+
+.elm-file-critical {
+  display: relative;
+  width: 100%;
+
+  top: 0px;
+  left: 0px;
+
+  border: solid 3px #ff3333;
+  box-shadow: 5px 5px 0px 1px #ff3333;
+}
+
+.elm-file-critical:hover {
+  top: 4px;
+  left: 4px;
+  position: relative;
+  box-shadow: 2px 2px #ff3333;
+}
+
+.elm-file:hover p {
+  background-color: rgb(12, 145, 216);
+}
+
+.elm-file-critical:hover p {
+  background-color: #ff3333;
+}
+
+.elm-file:hover .elm-file-stats p, .elm-file-critical:hover .elm-file-stats p {
+  background-color: white;
+}
+
+.elm-file p {
+  width: 100%;
+
+  margin: 0%;
+  padding: 3% 0%;
+
+  color: black;
+  background-color: #6aaacc;
+  font-weight: bold;
+  font-family: "Courier New";
+}
+
+.elm-file-critical p {
+  width: 100%;
+
+  margin: 0%;
+  padding: 3% 0%;
+
+  color: black;
+  background-color: #ff8080;
+  font-weight: bold;
+  font-family: "Courier New";
+}
+
+.elm-stats-header {
+  width: 100%;
+
+  margin: 0%;
+  padding: 2% 0%;
+
+  text-align: center;
+  color: black;
+  background-color: #6aaacc;
+  font-weight: bold;
+  font-family: "Courier New";
+}
+
+.elm-file-stats p {
+  margin: 0%;
+  padding: 0%;
+
+  background-color: white;
+  font-weight: normal;
+  text-align: left;
+}
+
+.elm-stats, .elm-staties {
+  display: inline-block;
+}
+
+.elm-staties {
+  width: 60%;
+}
+
+.elm-stats {
+  width: 40%;
+}
+
+.elm-stats-shown {
+  width: 98%;
+
+  margin: 1% 0%;
+  top: 0;
+
+  text-align: left;
+  display: inline-block;
+  float: left;
+  background-color: white;
+  border: solid 3px rgb(12, 145, 216);
+  box-shadow: 5px 5px 0px 1px rgb(12, 145, 216);
+}
+
+.elm-stats-shown p {
+  margin: 0%;
+}
+
+.elm-stats p {
+  margin-left: 0%;
+
+  font-family: "Courier New";
+}
+
+.parsed {
+  margin: 3% 0%;
+}
+
+.parsed-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.table-name, .table-value {
+  display: inline-block;
+  padding: 5px 0px;
+}
+
+.table-heading {
+  padding: 10px 0px;
+  width: 98%;
+  padding-left: 2%;
+}
+
+.table-name {
+  width: 40%;
+}
+
+.table-value {
+  width: 15%;
+}
+
+.table-row {
+  width: 98%;
+  padding-left: 2%;
+}
+
+.table-row:hover {
+  background-color: #6aaacc;
+}
+
+.modules-name, .modules-value {
+  display: inline-block;
+}
+
+.modules-name {
+  width: 8%;
+  padding-left: 2%;
+}
+
+.modules-value {
+  width: 10%;
+  text-align: center;
+}
+
+.modules-warning {
+  background-color: #ff8080;
+}
+
+.modules-heading {
+  padding: 10px 0px;
+  text-orientation: upright;
+  writing-mode: horizontal-bt;
+}
+
+.modules-warning, .modules-normal {
+  padding: 5px 0px;
+}
+
+.modules-warning:hover {
+  background-color: #ff3333;
+}
+
+.modules-normal:hover {
+  background-color: #6aaacc;
+}
