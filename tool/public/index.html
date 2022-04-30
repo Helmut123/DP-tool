@@ -11,12 +11,22 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
-    <title>Elm App</title>
+    <title>Elm Analyzer</title>
 </head>
 <body>
-  <script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+  <script src="https://cpettitt.github.io/project/graphlib-dot/v0.4.10/graphlib-dot.min.js"></script>
+  <script src="https://cpettitt.github.io/project/dagre-d3/v0.1.5/dagre-d3.min.js"></script>
+
+<!--  <script>
     var app = Elm.Main.init({ node: document.querySelector('main') })
-  </script>
+  </script> -->
+
+  <svg id="graphContainer">
+    <g/>
+  </svg>
+
   <div id="root"></div>
+
 </body>
 </html>

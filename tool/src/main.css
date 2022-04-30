@@ -292,3 +292,38 @@ body {
 .modules-normal:hover {
   background-color: #6aaacc;
 }
+
+.DOT {
+  text-align: left;
+  width: 50%;
+  margin-left: 45%;
+  margin-top: 2%;
+}
+
+/* SVG Diagram CSS part */
+svg {
+  overflow: hidden;
+  margin: 1em;
+  display: block;
+}
+
+.node rect {
+  stroke: #333;
+  stroke-width: 2.5px;
+  fill: white;
+}
+
+.edgeLabel rect {
+  fill: white;
+}
+
+.edgePath {
+  stroke: #333;
+  stroke-width: 1.5px;
+  fill: none;
+}
+
+#dot {
+  /*visibility: hidden;*/
+  display: block;
+}

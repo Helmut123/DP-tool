@@ -48,6 +48,7 @@ type alias Model =
     , min_imports : Int
     , max_imports : Int
     , show_diagram : Bool
+    , show_graph : Bool
     , show_boiler : Bool
     , graph_nodes : List (Graph.Node ModuleName)
     , graph_edges : List (Graph.Edge String) }
@@ -58,7 +59,7 @@ type alias UploadedFile =
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { files = [], loc = 0, min_loc = 99999, max_loc = 0, locwe = 0, min_locwe = 99999, max_locwe = 0, units = 0, min_units = 99999, max_units = 0, units_loc = 0, min_units_loc = 99999, max_units_loc = 0, show_loaded = False, imports = 0, min_imports = 99999, max_imports = 0, show_diagram = False, show_boiler = False, graph_nodes = [], graph_edges = [] }, Cmd.none )
+    ( { files = [], loc = 0, min_loc = 99999, max_loc = 0, locwe = 0, min_locwe = 99999, max_locwe = 0, units = 0, min_units = 99999, max_units = 0, units_loc = 0, min_units_loc = 99999, max_units_loc = 0, show_loaded = False, imports = 0, min_imports = 99999, max_imports = 0, show_diagram = False, show_graph = False, show_boiler = False, graph_nodes = [], graph_edges = [] }, Cmd.none )
 
 
 ---- UPDATE ----
@@ -70,6 +71,7 @@ type Msg
     | FileReadSuccess String Int String
     | DisplayDiagram
     | AnalyzeBoilerplate
+    | Diagram
 --    | AnalyzeApplication (List UploadedFile)
 
 
@@ -80,7 +82,7 @@ update msg model =
             let
                 filterFiles = List.filter (\fil -> isElmFile (File.name fil)) files
             in
-                ( { model | files = List.map (\file -> UploadedFile file "" [""] 0 0 0 0 0 0 0) filterFiles, loc = 0, min_loc = 99999, max_loc = 0, locwe = 0, min_locwe = 99999, max_locwe = 0, units = 0, min_units = 99999, max_units = 0, units_loc = 0, min_units_loc = 99999, max_units_loc = 0, show_loaded = False, imports = 0, min_imports = 99999, max_imports = 0, show_diagram = False, show_boiler = False, graph_nodes = [], graph_edges = [] }, Cmd.none )
+                ( { model | files = List.map (\file -> UploadedFile file "" [""] 0 0 0 0 0 0 0) filterFiles, loc = 0, min_loc = 99999, max_loc = 0, locwe = 0, min_locwe = 99999, max_locwe = 0, units = 0, min_units = 99999, max_units = 0, units_loc = 0, min_units_loc = 99999, max_units_loc = 0, show_loaded = False, imports = 0, min_imports = 99999, max_imports = 0, show_diagram = False, show_graph = False, show_boiler = False, graph_nodes = [], graph_edges = [] }, Cmd.none )
         
         ReadFiles ->
             ( { model | show_loaded = True }
@@ -144,6 +146,10 @@ update msg model =
 
         AnalyzeBoilerplate ->
             ( { model | show_boiler = True }, Cmd.none )
+
+        Diagram ->
+            ( { model | show_graph = True }, sendDOT (Graph.DOT.output nodeName edgeName (Graph.fromNodesAndEdges model.graph_nodes (List.concat (getEdges model.files model.graph_nodes)))) )
+
 
 
 nodeName : ModuleName -> Maybe String
@@ -462,16 +468,38 @@ view model =
                                     if model.show_diagram then
                                         div [ class "boilerplate" ]
                                         [
-                                            p [ class "elm-stats-header" ] [ text "Modules connections diagram" ]
+                                            p [ class "elm-stats-header" ] [ text "Modules connections digraph" ]
                                         --    , p [] [ text (Debug.toString model.graph_nodes) ]
                                         --    , p [] [ text (Debug.toString (List.concat (getEdges model.files model.graph_nodes))) ]
                                         --    , p [] [ text (Debug.toString (Graph.fromNodesAndEdges model.graph_nodes (List.concat (getEdges model.files model.graph_nodes)))) ]
-                                            , p [] [ text (Graph.DOT.output nodeName edgeName (Graph.fromNodesAndEdges model.graph_nodes (List.concat (getEdges model.files model.graph_nodes)))) ]
+                                            , div [] 
+                                            [
+                                                div [ class "DOT" ] <| List.map
+                                                    (\one -> div []
+                                                        [
+                                                            p [] [ text one ]
+                                                        ]
+                                                    )
+                                                    (Str.split "\n" (Graph.DOT.output nodeName edgeName (Graph.fromNodesAndEdges model.graph_nodes (List.concat (getEdges model.files model.graph_nodes)))))
+                                            ]
+                                            , div []
+                                            [
+                                                if model.show_graph then 
+                                                    div []
+                                                    [
+                                                        p [] [ text " " ]
+                                                    ]
+                                                else
+                                                    div []
+                                                    [
+                                                        button [ onClick Diagram, class "read-boiler" ] [ text ("Display diagram") ]
+                                                    ]
+                                            ]
                                         ]
                                     else
                                         div []
                                         [
-                                            button [ onClick DisplayDiagram, class "read-boiler" ] [ text ("Display modules connections") ]
+                                            button [ onClick DisplayDiagram, class "read-boiler" ] [ text ("Display modules connections in DOT") ]
                                         ]
                                 ]
                             ]
